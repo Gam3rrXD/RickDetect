@@ -7,3 +7,10 @@ Just Run The .py File And Enter Your Desired Username
 
 # W A R N I N G 
 DO NOT REDISTRABUTE THIS PROGRAM / EDIT WITHOUT ASKING ME (Gam3rr#0015)
+
+
+#Coming Soon
+Windows Exclusive Edition (C#)
+Multi URL Checker
+New UI
+Settings Menu
