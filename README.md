@@ -11,6 +11,10 @@ DO NOT REDISTRABUTE THIS PROGRAM / EDIT WITHOUT ASKING ME (Gam3rr#0015)
 
 # Coming Soon
 Windows Exclusive Edition (C#)
+
 Multi URL Checker
+
 New UI
+
 Settings Menu
+
