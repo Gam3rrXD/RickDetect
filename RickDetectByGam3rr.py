@@ -28,9 +28,12 @@ def login():
         time.sleep(3)
     else:
         user = input("\nUsername : ")
-        if user == "Gam3rr" or "gam3rr":
+        if user == "Gam3rr":
             print(Fore.RED + "You Cant Choose The Developers Name LOL")
+            time.sleep(2)
             login()
+        else:
+            return
         with open('creds.rick', 'w') as f:
             f.write(user)
         print(Fore.GREEN + "Welcome " + user)
@@ -49,9 +52,6 @@ def main():
 
 
     urll = input(Fore.WHITE + "Enter URL: ")
-    aaa = requests.get(urll)
-    print(aaa.text)
-    time.sleep(1000)
     word = ["https://","http://","www.",".com", ".net", ".co.uk", '.org',".gg",".tech",".cs"]
     validity = bool(re.findall("|".join(word), urll, re.MULTILINE))
     if validity == True:
