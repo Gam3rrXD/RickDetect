@@ -1,21 +1,3 @@
-import ctypes
-import time
-import os
-from pathlib import Path
-import re
-import subprocess
-user = "NewUser"
-try:
-    import colorama
-except ModuleNotFoundError:
-    os.system("pip install colorama")
-try:
-	import requests
-except ModuleNotFoundError:
-	os.system("pip install requests")
-from colorama import init
-from colorama import Fore, Back, Style
-init()
 """
 MIT License
 
@@ -39,8 +21,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
+import ctypes
+import time
+import subprocess
+from pathlib import Path
+from colorama import init, Fore
+try:
+    import colorama
+except ModuleNotFoundError:
+    subprocess.run(["pip", "install", "colorama"])
+try:
+    import requests
+except ModuleNotFoundError:
+    subprocess.run(["pip", "install", "requests"])
 
-def login():
+init()
+
+def login(user):
     ctypes.windll.kernel32.SetConsoleTitleW("RickDectect | By Gam3rr#0015 | Github Edition | Version 2 | Login")
     os.system('cls')
     print(Fore.WHITE + """                          _____  _      _    _____       _            _   
@@ -51,15 +48,9 @@ def login():
                          |_|  \_\_|\___|_|\_\_____/ \___|\__\___|\___|\__|""")
     if os.path.exists("creds.rick"):
         user = Path('creds.rick').read_text()
-        if "gam3rr" in user.lower():
-            print(Fore.RED + "Imagine Trying To Edit The File To Get The Developers Name")
-            os.remove("creds.rick")
-            time.sleep(2)
-            login()
-        else:
-            print("\nWelcome Back " + Fore.GREEN + user)
-            time.sleep(3)
-            menu()
+	print(f"\nWelcome Back {Fore.GREEN}{user}")
+	time.sleep(3)
+	menu(user)
     else:
         user = input("\nUsername: ")
         if "gam3rr" in user.lower():
@@ -67,47 +58,21 @@ def login():
             if os.path.exists("creds.rick"):
                 os.remove("creds.rick")
             time.sleep(2)
-            login()
+            login(user)
         else:
             with open('creds.rick', 'w') as f:
                 f.write(user)
-            print(Fore.WHITE + "Welcome " + Fore.GREEN + user)
+            print(f"{Fore.WHITE}Welcome {Fore.GREEN}{user}")
             time.sleep(3)
-            menu()
+            menu(user)
 
-def setting():
-        os.system('cls')
-        user = Path('creds.rick').read_text()
-        cmd = 'wmic csproduct get uuid'
-        uuid = str(subprocess.check_output(cmd))
-        pos1 = uuid.find("\\n")+2
-        uuid = uuid[pos1:-15]
-        ctypes.windll.kernel32.SetConsoleTitleW("RickDectect | By Gam3rr#0015 | Github Edition | Version 2 | User : " + user)
-        print(Fore.WHITE + """                          _____  _      _    _____       _            _   
-                         |  __ \(_)    | |  |  __ \     | |          | |  
-                         | |__) |_  ___| | _| |  | | ___| |_ ___  ___| |_ 
-                         |  _  /| |/ __| |/ / |  | |/ _ \ __/ _ \/ __| __|
-                         | | \ \| | (__|   <| |__| |  __/ ||  __/ (__| |_ 
-                         |_|  \_\_|\___|_|\_\_____/ \___|\__\___|\___|\__|""")
-        print("Username: " + Fore.GREEN +  user)
-        print(Fore.WHITE + "Version: " + Fore.CYAN + "2")
-        print(Fore.WHITE + "HWID: " + Fore.BLUE +  uuid)
-        print(Fore.WHITE + "Created By:" + Fore.RED + " Gam3rr#0015")
-        print(Fore.WHITE + "Edition: " + Fore.LIGHTGREEN_EX + "Github")
-        print(Fore.WHITE + "[S] " + Fore.RED + "Sign Out")
-        print(Fore.WHITE + "[X] " + Fore.GREEN + "Go Back")
-        a1 = input(Fore.WHITE + "Option: ").lower()
-        if a1 == "x":
-            menu()
-        if a1 == "s":
-            os.remove("creds.rick")
-            print("Signed Out!")
-            time.sleep(3)
-            login()
-        else:
-            print(Fore.RED + "Invalid Option!")
-            time.sleep(3)
-            setting()
+def setting(user):
+    os.system('cls')
+    cmd = 'wmic csproduct get uuid'
+    uuid = str(subprocess.check_output(cmd))
+    pos1 = uuid.find("\\n")+2
+    uuid = uuid[pos1:-15]
+    ctypes.windll.kernel32.SetConsoleTitleW(f"RickDectect | By Gam3rr#0015 | Github Edition | Version 2 | User : {user}")
 def menu():
     user = Path('creds.rick').read_text()
     ctypes.windll.kernel32.SetConsoleTitleW("RickDectect | By Gam3rr#0015 | Github Edition | Version 2 | User : " + user)
